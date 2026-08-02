@@ -117,6 +117,20 @@ function testInvalidCheckpointTableName() {
     test:assertTrue(store.message().includes("Invalid checkpoint table name"));
 }
 
+@test:Config {}
+function testCheckpointTableNameCollidingWithMessagesTableRejected() {
+    jdbc:Client cl = getClient();
+    // Without this check, `initializeDatabase()` creates the messages schema under this name
+    // eagerly at init, and `ensureCheckpointTable()`'s `CREATE TABLE IF NOT EXISTS` then silently
+    // no-ops against it later - so every checkpoint operation would fail with a confusing
+    // "no such column: session_id"-style SQL error instead of a clear error here.
+    ShortTermMemoryStore|Error store = new (cl, checkpointTableName = "chat_messages");
+    if store !is Error {
+        test:assertFail("Expected an error when checkpointTableName collides with tableName");
+    }
+    test:assertTrue(store.message().includes("must be different from the chat messages table name"));
+}
+
 @test:Config {
     before: dropCheckpointTable
 }

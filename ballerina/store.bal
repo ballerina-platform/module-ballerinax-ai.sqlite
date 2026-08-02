@@ -106,6 +106,10 @@ public isolated class ShortTermMemoryStore {
                 + " Table name must start with a letter or underscore, "
                 + "and can only contain letters, digits, and underscores.");
         }
+        if tableName == checkpointTableName {
+            return error(string `Invalid checkpoint table name: '${checkpointTableName}'.`
+                + " It must be different from the chat messages table name.");
+        }
         if maxMessagesPerKey < 1 {
             return error(string `Invalid 'maxMessagesPerKey': ${maxMessagesPerKey}.`
                 + " It must be a positive integer.");
