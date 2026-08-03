@@ -15,7 +15,6 @@
 // under the License.
 
 import ballerina/ai;
-import ballerina/sql;
 import ballerina/test;
 import ballerinax/java.jdbc;
 
