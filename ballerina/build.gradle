@@ -49,7 +49,7 @@ ballerina {
     module = packageName
     testCoverageParam = "--code-coverage --coverage-format=xml"
     isConnector = true
-    platform = "any"
+    platform = "java21"
 }
 
 task updateTomlFiles {
