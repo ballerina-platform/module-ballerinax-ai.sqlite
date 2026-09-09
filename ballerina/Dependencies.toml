@@ -104,7 +104,7 @@ dependencies = [
 [[package]]
 org = "ballerina"
 name = "file"
-version = "1.13.0"
+version = "1.13.1"
 dependencies = [
 	{org = "ballerina", name = "io"},
 	{org = "ballerina", name = "jballerina.java"},
@@ -433,7 +433,7 @@ modules = [
 [[package]]
 org = "ballerinax"
 name = "ai.sqlite"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = [
 	{org = "ballerina", name = "ai"},
 	{org = "ballerina", name = "file"},
