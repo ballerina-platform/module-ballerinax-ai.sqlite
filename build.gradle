@@ -57,8 +57,14 @@ allprojects {
 
 def moduleVersion = project.version.replace("-SNAPSHOT", "")
 
-task build {
-    dependsOn(':ai.sqlite-ballerina:build')
+if (tasks.names.contains('build')) {
+    tasks.named('build') {
+        dependsOn(':ai.sqlite-ballerina:build')
+    }
+} else {
+    tasks.register('build') {
+        dependsOn(':ai.sqlite-ballerina:build')
+    }
 }
 
 release {
